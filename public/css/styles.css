@@ -1,0 +1,8 @@
+.list-container {
+  margin-top: 100px;
+}
+
+.list-item {
+  border: 2px black solid;
+  margin-top: 5px;
+}
