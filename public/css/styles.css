@@ -6,3 +6,8 @@
   border: 2px black solid;
   margin-top: 5px;
 }
+
+.button-container {
+  display: inline-block;
+  float: right;
+}
