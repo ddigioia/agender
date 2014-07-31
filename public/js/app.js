@@ -2,13 +2,21 @@
   var app = angular.module('agender', ['ui.bootstrap']);
   
   app.controller('ListController', function(){
+    this.listItem = {
+      itemContent: ""
+    };
     this.listItems = listItems;
+
+    this.addListItem = function(){
+      listItems.push(this.listItem);
+      this.listItem = {};
+    };
   });
 
   var listItems = [
-    {content: 'first test list item'},
-    {content: 'second test list item'},
-    {content: 'third test list item'}
+    {itemContent: 'first test list item'},
+    {itemContent: 'second test list item'},
+    {itemContent: 'third test list item'}
   ];
 
 })();

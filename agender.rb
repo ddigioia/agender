@@ -9,6 +9,9 @@ require 'sinatra/reloader'
 # SESSIONS
 use Rack::Session::Pool, :expire_after => 2592000
 
+#MONGO SETUP
+  #LOCAL
+  DB = Mongo::Connection.new.db("agender_app", :pool_size => 5, :timeout=> 5)
 
 # ROUTES
 
@@ -16,4 +19,8 @@ use Rack::Session::Pool, :expire_after => 2592000
   get '/' do
     redirect to '/index.html'
   end
+
+
+  #API
+
 
