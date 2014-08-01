@@ -6,11 +6,32 @@
     $scope.formInput = {
       itemContent: ""
     };
-    this.listItems = listItems;
-    this.addListItem = function(){
-      listItems.push(this.formInput);
-      this.formInput = {};
+
+    $scope.listItems = [];
+
+    $scope.addListItem = function(){
+      listService.addListItem($scope.formInput.itemContent)
+        .then(
+          loadRemoteData,
+          function(errorMessage){
+            console.log(errorMessage);
+          }
+        );
+        $scope.formInput.itemContent = "";
     };
+
+    function applyRemoteData(newListItems){
+      $scope.listItems = newListItems;
+    }
+
+    function loadRemoteData(){
+      listService.getListItems()
+        .then(
+          function(listItems){
+            applyRemoteData(listItems);
+          }
+        );
+    }
   });
 
 
@@ -30,17 +51,17 @@
 
       //Adds a listItem to the remote list collection
       function addListItem(itemContent){
+        console.log(itemContent);
         var request = $http({
           method: "post",
           url: "/api/new_document",
           params: {
-            action: "add"
+            itemContent: itemContent
           },
           data: {
             itemContent: itemContent
           }
         });
-
         return(request.then(handleSuccess, handleError));
       }
 

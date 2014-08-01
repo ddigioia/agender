@@ -8,12 +8,12 @@
 </head>
 <body>
   <div class="col-sm-6 col-sm-offset-3 list-container" ng-controller="ListController as list">
-    <form class="listItem-form" ng-submit="list.addListItem(list.listItem)">
-      <input ng-model="list.formInput.itemContent" type="text" class="form-control" placeholder="Eat a bunch of cheese" />
-      <p>{{list.listItem.itemContent}}</p>
+    <form class="listItem-form" ng-submit="addListItem()">
+      <input ng-model="formInput.itemContent" type="text" class="form-control" placeholder="Eat a bunch of cheese" />
+      <p>{{formInput.itemContent}}</p>
     </form>
     <h2>TO-DO</h3>
-    <div ng-repeat="listItem in list.listItems" class="list-item">
+    <div ng-repeat="listItem in listItems" class="list-item">
       <h3>{{listItem.itemContent}}
         <span class="button-container">
           <button type="button" class="btn btn-default btn-md"> 
