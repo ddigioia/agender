@@ -8,6 +8,10 @@
       itemContent: ""
     };
 
+    $scope.formEditInput = {
+      itemContent: ""
+    };
+
     $scope.listItems = [];
 
     loadRemoteData();
@@ -32,8 +36,9 @@
     };
 
     $scope.editListItem = function(listItem){
-      listService.editListItem(listItem)
+      listService.editListItem(listItem, $scope.formEditInput.itemContent)
         .then(loadRemoteData);
+        $scope.formEditInput.itemContent = "";
     };
 
     //PRIORITIZING LISTITEMS
@@ -117,17 +122,18 @@
       }
 
       //Edits the listitem
-      function editListItem(listItem) {
+      function editListItem(listItem, newContent) {
         console.log(listItem);
+        console.log(newContent);
         var request = $http({
           method: "put",
           url: "/api/update_document",
           params: {
             id: listItem["_id"]["$oid"],
-            itemContent: listItem["itemContent"]
+            itemContent: newContent
           },
           data: {
-            itemContent: listItem["itemContent"]
+            itemContent: newContent
           }
         });
         return(request.then(handleSuccess, handleError));

@@ -10,17 +10,22 @@
   <div class="col-sm-6 col-sm-offset-3 list-container" ng-controller="ListController as list">
     <form class="listItem-form" ng-submit="addListItem()">
       <input ng-model="formInput.itemContent" type="text" class="form-control" placeholder="Eat a bunch of cheese" />
-      <p>{{formInput.itemContent}}</p>
     </form>
     <h2>TO-DO</h3>
     <div ng-repeat="listItem in listItems" class="list-item">
-      <h3>{{listItem.itemContent}}
+      <span>
+        <h3>{{listItem.itemContent}}
+      </span>
+      <form ng-show="editing" ng-submit="editListItem(listItem); editing = false">
+        <input ng-model="formEditInput.itemContent" type="text" placeholder="{{listItem.itemContent}}" ng-required/>
+
+      </form>  
         <span class="button-container">
           <!--Buttons to prioritize list items-->
           <span ng-show="!$first" ng-click="moveUp($index)" class="glyphicon glyphicon-arrow-up"></span>
           <span ng-show="!$last" ng-click="moveDown($index)" class="glyphicon glyphicon-arrow-down"></span>
           <!--Buttons to edit and delete list items-->
-          <button ng-click="editListItem(listItem)" type="button" class="btn btn-default btn-md"> 
+          <button ng-click="editing = true" type="button" class="btn btn-default btn-md"> 
             <span class="glyphicon glyphicon-pencil"></span>Edit
           </button>
           <button ng-click="removeListItem(listItem)" type="button" class="btn btn-default btn-md">
