@@ -9,6 +9,9 @@
 
     $scope.listItems = [];
 
+    loadRemoteData();
+
+    //PUBLIC METHODS
     $scope.addListItem = function(){
       listService.addListItem($scope.formInput.itemContent)
         .then(
@@ -20,6 +23,13 @@
         $scope.formInput.itemContent = "";
     };
 
+    $scope.removeListItem = function(listItem){
+      console.log(listItem["_id"]["$oid"]);
+      listService.removeListItem(listItem["_id"]["$oid"])
+        .then(loadRemoteData);
+    };
+
+    //PRIVATE METHODS
     function applyRemoteData(newListItems){
       $scope.listItems = newListItems;
     }
@@ -35,7 +45,7 @@
   });
 
 
-//LIST SERVICE==============================================
+  //LIST SERVICE==============================================
 
   //Acts as a repository for the remote list collection
   app.service(
@@ -80,17 +90,17 @@
 
       //Remove the listItem from the remote list collection
       function removeListItem(id) {
+        console.log(id);
         var request = $http({
           method: "delete",
-          url: "/api/remove_document",
+          url: "/api/delete_document",
           params: {
-            action: "delete"
+            id: id
           },
           data: {
             id: id
           }
         });
-
         return(request.then(handleSuccess, handleError));
       }
 
@@ -107,11 +117,6 @@
     }
   );
 
-  var listItems = [
-    {itemContent: 'fourth test list item'},
-    {itemContent: 'second test list item'},
-    {itemContent: 'third test list item'}
-  ];
 
 })();
 
