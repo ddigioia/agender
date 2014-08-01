@@ -2,8 +2,6 @@
   var app = angular.module('agender', ['ui.bootstrap', 'ngRoute']);
   
 
-
-
 //LIST CONTROLLER=========================================
   app.controller('ListController', function($scope, listService){
     $scope.formInput = {
@@ -27,13 +25,31 @@
     };
 
     $scope.removeListItem = function(listItem){
+      console.log(this.listItem);
       listService.removeListItem(listItem["_id"]["$oid"])
         .then(loadRemoteData);
+
     };
 
     $scope.editListItem = function(listItem){
       listService.editListItem(listItem)
         .then(loadRemoteData);
+    };
+
+    //PRIORITIZING LISTITEMS
+    var move = function (origin, destination) {
+      var temp = $scope.listItems[destination];
+      $scope.listItems[destination] = $scope.listItems[origin];
+      $scope.listItems[origin] = temp;
+    };
+ 
+    $scope.moveUp = function(index){
+
+        move(index, index - 1);
+    };
+ 
+    $scope.moveDown = function(index){
+        move(index, index + 1);
     };
 
 
