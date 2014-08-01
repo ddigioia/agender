@@ -23,8 +23,8 @@ configure do
   set :mongo_db, conn.db('agender_app')
 end
 
-LISTS = DB.collection('lists')
-LISTITEMS = DB.collection('listItems')
+# LISTS = DB.collection('lists')
+# LISTITEMS = DB.collection('listItems')
 
 # ROUTES
 
@@ -65,7 +65,9 @@ post '/api/new_document' do
   document_by_id(new_id)
 end
 
-delete '/api/delete_document/:id' do
+
+
+delete '/api/delete_document' do
   content_type :json
   db = settings.mongo_db['listItems']
   id = object_id(params[:id])

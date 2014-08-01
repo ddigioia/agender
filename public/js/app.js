@@ -24,7 +24,8 @@
     };
 
     $scope.removeListItem = function(listItem){
-      listService.removeListItem(listItem.id)
+      console.log(listItem["_id"]["$oid"]);
+      listService.removeListItem(listItem["_id"]["$oid"])
         .then(loadRemoteData);
     };
 
@@ -89,11 +90,12 @@
 
       //Remove the listItem from the remote list collection
       function removeListItem(id) {
+        console.log(id);
         var request = $http({
           method: "delete",
-          url: "/api/delete_document/:id",
+          url: "/api/delete_document",
           params: {
-            action: "delete"
+            id: id
           },
           data: {
             id: id
