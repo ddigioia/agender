@@ -16,7 +16,11 @@
     <div ng-repeat="listItem in listItems" class="list-item">
       <h3>{{listItem.itemContent}}
         <span class="button-container">
-          <button type="button" class="btn btn-default btn-md"> 
+          <!--Buttons to prioritize list items-->
+          <span ng-show="!$first" ng-click="moveUp($index)" class="glyphicon glyphicon-arrow-up"></span>
+          <span ng-show="!$last" ng-click="moveDown($index)" class="glyphicon glyphicon-arrow-down"></span>
+          <!--Buttons to edit and delete list items-->
+          <button ng-click="editListItem(listItem)" type="button" class="btn btn-default btn-md"> 
             <span class="glyphicon glyphicon-pencil"></span>Edit
           </button>
           <button ng-click="removeListItem(listItem)" type="button" class="btn btn-default btn-md">
@@ -29,6 +33,7 @@
   </div>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/app.js"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.js"></script>
 </body>

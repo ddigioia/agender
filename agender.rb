@@ -65,8 +65,17 @@ post '/api/new_document' do
   document_by_id(new_id)
 end
 
+put '/api/update_document' do
+  content_type :json
+  id   = object_id(params[:id])
+  itemContent = params[:itemContent]
+  settings.mongo_db['listItems'].
+    update({:_id => id}, {"$set" => {:itemContent => itemContent}})
+  document_by_id(id)
+end
 
 
+#delete the specific document and return success
 delete '/api/delete_document' do
   content_type :json
   db = settings.mongo_db['listItems']

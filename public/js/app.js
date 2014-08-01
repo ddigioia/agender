@@ -1,6 +1,7 @@
 (function() {
   var app = angular.module('agender', ['ui.bootstrap', 'ngRoute']);
   
+
 //LIST CONTROLLER=========================================
   app.controller('ListController', function($scope, listService){
     $scope.formInput = {
@@ -24,10 +25,33 @@
     };
 
     $scope.removeListItem = function(listItem){
-      console.log(listItem["_id"]["$oid"]);
+      console.log(this.listItem);
       listService.removeListItem(listItem["_id"]["$oid"])
         .then(loadRemoteData);
+
     };
+
+    $scope.editListItem = function(listItem){
+      listService.editListItem(listItem)
+        .then(loadRemoteData);
+    };
+
+    //PRIORITIZING LISTITEMS
+    var move = function (origin, destination) {
+      var temp = $scope.listItems[destination];
+      $scope.listItems[destination] = $scope.listItems[origin];
+      $scope.listItems[origin] = temp;
+    };
+ 
+    $scope.moveUp = function(index){
+
+        move(index, index - 1);
+    };
+ 
+    $scope.moveDown = function(index){
+        move(index, index + 1);
+    };
+
 
     //PRIVATE METHODS
     function applyRemoteData(newListItems){
@@ -45,6 +69,9 @@
   });
 
 
+
+
+
   //LIST SERVICE==============================================
 
   //Acts as a repository for the remote list collection
@@ -54,14 +81,14 @@
       return({
         addListItem:    addListItem,
         getListItems:   getListItems,
-        removeListItem: removeListItem
+        removeListItem: removeListItem,
+        editListItem:   editListItem
       });
 
       //PUBLIC METHODS
 
       //Adds a listItem to the remote list collection
       function addListItem(itemContent){
-        console.log(itemContent);
         var request = $http({
           method: "post",
           url: "/api/new_document",
@@ -73,6 +100,7 @@
           }
         });
         return(request.then(handleSuccess, handleError));
+        //you can use the .then method here because the request value is a "promise", you can also use the then method to register callbacks
       }
 
       //Gets all the listItems from the remote list collection
@@ -88,9 +116,25 @@
         return(request.then(handleSuccess, handleError));
       }
 
+      //Edits the listitem
+      function editListItem(listItem) {
+        console.log(listItem);
+        var request = $http({
+          method: "put",
+          url: "/api/update_document",
+          params: {
+            id: listItem["_id"]["$oid"],
+            itemContent: listItem["itemContent"]
+          },
+          data: {
+            itemContent: listItem["itemContent"]
+          }
+        });
+        return(request.then(handleSuccess, handleError));
+      }
+
       //Remove the listItem from the remote list collection
       function removeListItem(id) {
-        console.log(id);
         var request = $http({
           method: "delete",
           url: "/api/delete_document",
