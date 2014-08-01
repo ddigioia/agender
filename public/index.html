@@ -16,7 +16,7 @@
     <div ng-repeat="listItem in listItems" class="list-item">
       <h3>{{listItem.itemContent}}
         <span class="button-container">
-          <button type="button" class="btn btn-default btn-md"> 
+          <button ng-click="editListItem(listItem)" type="button" class="btn btn-default btn-md"> 
             <span class="glyphicon glyphicon-pencil"></span>Edit
           </button>
           <button ng-click="removeListItem(listItem)" type="button" class="btn btn-default btn-md">

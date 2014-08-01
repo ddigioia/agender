@@ -24,7 +24,6 @@
     };
 
     $scope.removeListItem = function(listItem){
-      console.log(listItem["_id"]["$oid"]);
       listService.removeListItem(listItem["_id"]["$oid"])
         .then(loadRemoteData);
     };
@@ -61,7 +60,6 @@
 
       //Adds a listItem to the remote list collection
       function addListItem(itemContent){
-        console.log(itemContent);
         var request = $http({
           method: "post",
           url: "/api/new_document",
@@ -90,7 +88,6 @@
 
       //Remove the listItem from the remote list collection
       function removeListItem(id) {
-        console.log(id);
         var request = $http({
           method: "delete",
           url: "/api/delete_document",
