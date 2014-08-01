@@ -14,7 +14,7 @@
     <h2>TO-DO</h3>
     <div ng-repeat="listItem in listItems" class="list-item">
       <span>
-        <h3>{{listItem.itemContent}}
+        <h3 ng-cloak class="ng-cloak">{{listItem.itemContent}}
       </span>
       <form ng-show="editing" ng-submit="editListItem(listItem); editing = false">
         <input ng-model="formEditInput.itemContent" type="text" placeholder="{{listItem.itemContent}}" ng-required/>
