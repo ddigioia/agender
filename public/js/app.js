@@ -1,6 +1,9 @@
 (function() {
   var app = angular.module('agender', ['ui.bootstrap', 'ngRoute']);
   
+
+
+
 //LIST CONTROLLER=========================================
   app.controller('ListController', function($scope, listService){
     $scope.formInput = {
@@ -28,6 +31,12 @@
         .then(loadRemoteData);
     };
 
+    $scope.editListItem = function(listItem){
+      listService.editListItem(listItem)
+        .then(loadRemoteData);
+    };
+
+
     //PRIVATE METHODS
     function applyRemoteData(newListItems){
       $scope.listItems = newListItems;
@@ -44,6 +53,9 @@
   });
 
 
+
+
+
   //LIST SERVICE==============================================
 
   //Acts as a repository for the remote list collection
@@ -53,7 +65,8 @@
       return({
         addListItem:    addListItem,
         getListItems:   getListItems,
-        removeListItem: removeListItem
+        removeListItem: removeListItem,
+        editListItem:   editListItem
       });
 
       //PUBLIC METHODS
@@ -71,6 +84,7 @@
           }
         });
         return(request.then(handleSuccess, handleError));
+        //you can use the .then method here because the request value is a "promise", you can also use the then method to register callbacks
       }
 
       //Gets all the listItems from the remote list collection
@@ -83,6 +97,23 @@
           }
         });
 
+        return(request.then(handleSuccess, handleError));
+      }
+
+      //Edits the listitem
+      function editListItem(listItem) {
+        console.log(listItem);
+        var request = $http({
+          method: "put",
+          url: "/api/update_document",
+          params: {
+            id: listItem["_id"]["$oid"],
+            itemContent: listItem["itemContent"]
+          },
+          data: {
+            itemContent: listItem["itemContent"]
+          }
+        });
         return(request.then(handleSuccess, handleError));
       }
 
