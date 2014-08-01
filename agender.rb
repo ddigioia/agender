@@ -52,11 +52,6 @@ end
 
 
 #API
-get '/api/collections' do
-  content_type :json
-  settings.mongo_db.collection_names.to_json
-end
-
 get '/api/documents' do
   content_type :json
   settings.mongo_db['listItems'].find.to_a.to_json
@@ -70,10 +65,19 @@ post '/api/new_document' do
   document_by_id(new_id)
 end
 
-# get '/api/:listItems' do
-#   DB.collection(params[:listItems]).find.to_a.map{|list_item_id| from_bson_id(list_item_id)}.to_json
+delete '/api/delete_document/:id' do
+  content_type :json
+  db = settings.mongo_db['listItems']
+  id = object_id(params[:id])
+  if db.find_one(id)
+    db.remove(:_id => id)
+    {:success => true}.to_json
+  else
+    {:success => false}.to_json
+  end
+end
 
-# end
+
 
 
 #ADDITIONAL METHODS

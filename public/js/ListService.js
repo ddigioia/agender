@@ -41,6 +41,7 @@ app.service(
 
     //Remove the listItem from the remote list collection
     function removeListItem(id) {
+      console.log("working");
       var request = $http({
         method: "delete",
         url: "/api/remove_document",
