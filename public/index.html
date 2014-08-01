@@ -9,7 +9,8 @@
 <body>
   <div class="col-sm-6 col-sm-offset-3 list-container" ng-controller="ListController as list">
     <form class="listItem-form" ng-submit="list.addListItem(list.listItem)">
-      <input ng-model="list.listItem.itemContent" type="text" class="form-control" placeholder="Eat a bunch of cheese" />
+      <input ng-model="list.formInput.itemContent" type="text" class="form-control" placeholder="Eat a bunch of cheese" />
+      <p>{{list.listItem.itemContent}}</p>
     </form>
     <h2>TO-DO</h3>
     <div ng-repeat="listItem in list.listItems" class="list-item">
@@ -27,8 +28,9 @@
 <!--     <h2>DONE</h2> -->
   </div>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
   <script type="text/javascript" src="js/app.js"></script>
-  <script type="text/javascript" src="js/ui-bootstrap-tpls-0.11.0.min.js"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.js"></script>
 </body>
 </html>
 
