@@ -13,31 +13,30 @@
     </form>
     <h2>TO-DO</h3>
     <div ng-repeat="listItem in listItems" class="list-item">
-      <span>
-        <h3 ng-cloak class="ng-cloak">{{listItem.itemContent}}
+      <span ng-cloak class="ng-cloak">
+        <h3 contenteditable="false" class="testing" id='listItem-{{$index}}'>{{listItem.itemContent}}</h3>
       </span>
-      <form ng-show="editing" ng-submit="editListItem(listItem); editing = false">
+<!--       <form ng-show="editing" ng-submit="editListItem(listItem); editing = false">
         <input ng-model="formEditInput.itemContent" type="text" placeholder="{{listItem.itemContent}}" ng-required/>
-
-      </form>  
+      </form>   -->
         <span class="button-container">
           <!--Buttons to prioritize list items-->
           <span ng-show="!$first" ng-click="moveUp($index)" class="glyphicon glyphicon-arrow-up"></span>
           <span ng-show="!$last" ng-click="moveDown($index)" class="glyphicon glyphicon-arrow-down"></span>
           <!--Buttons to edit and delete list items-->
-          <button ng-click="editing = true" type="button" class="btn btn-default btn-md"> 
+          <button ng-click="beginEdit($index)" contenteditable="true" type="button" class="btn btn-default btn-md"> 
             <span class="glyphicon glyphicon-pencil"></span>Edit
           </button>
           <button ng-click="removeListItem(listItem)" type="button" class="btn btn-default btn-md">
             <span class="glyphicon glyphicon-trash"></span>Delete
           </button>
         </span>
-      </h3>
     </div>
 <!--     <h2>DONE</h2> -->
   </div>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.min.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular-animate.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/app.js"></script>
   <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.10.0/ui-bootstrap-tpls.js"></script>

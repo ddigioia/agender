@@ -1,5 +1,5 @@
 (function() {
-  var app = angular.module('agender', ['ui.bootstrap', 'ngRoute']);
+  var app = angular.module('agender', ['ui.bootstrap', 'ngRoute', 'ngAnimate']);
   
 
 //LIST CONTROLLER=========================================
@@ -29,13 +29,17 @@
     };
 
     $scope.removeListItem = function(listItem){
-      console.log(this.listItem);
       listService.removeListItem(listItem["_id"]["$oid"])
         .then(loadRemoteData);
-
     };
 
+    $scope.beginEdit = function(id){
+      $('.testing')[id].contentEditable = "true";
+    };
+
+    //editListItem is currently not being called therefore an edit won't persist
     $scope.editListItem = function(listItem){
+      console.log(listItem);
       listService.editListItem(listItem, $scope.formEditInput.itemContent)
         .then(loadRemoteData);
         $scope.formEditInput.itemContent = "";
