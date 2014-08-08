@@ -52,9 +52,11 @@ end
 
 
 #API
+
+# gets all list items
 get '/api/documents' do
   content_type :json
-  settings.mongo_db['listItems'].find.to_a.to_json
+  settings.mongo_db['listItems'].find.to_a.reverse.to_json
 end
 
 # insert a new document from the request parameters,
@@ -65,6 +67,7 @@ post '/api/new_document' do
   document_by_id(new_id)
 end
 
+# edit specific list item
 put '/api/update_document' do
   content_type :json
   id   = object_id(params[:id])

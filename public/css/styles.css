@@ -16,7 +16,20 @@
   margin-top: 5px;
 }
 
+.list-item h3 {
+  display: inline-block;
+}
+
 .button-container {
   display: inline-block;
   float: right;
+  margin-top: 10px;
+}
+
+.glyphicon {
+  cursor: pointer;
+}
+
+span.glyphicon-arrow-up, .glyphicon-arrow-down {
+  font-size: 20px;
 }
