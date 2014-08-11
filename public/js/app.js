@@ -47,6 +47,7 @@
     };
 
     //PRIORITIZING LISTITEMS
+    //not persisting yet
     var move = function (origin, destination) {
       var temp = $scope.listItems[destination];
       $scope.listItems[destination] = $scope.listItems[origin];
