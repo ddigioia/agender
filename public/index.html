@@ -14,7 +14,7 @@
     <h2>TO-DO</h3>
     <div ng-repeat="listItem in listItems" class="list-item">
       <span ng-cloak class="ng-cloak">
-        <h3 contenteditable="false" class="testing" id='listItem-{{$index}}'>{{listItem.itemContent}}</h3>
+        <h3 contenteditable="false" class="list-item-class" ng-keypress="submitEdit($event, $index, listItem)" id='listItem-{{$index}}'>{{listItem.itemContent}}</h3>
       </span>
 <!--       <form ng-show="editing" ng-submit="editListItem(listItem); editing = false">
         <input ng-model="formEditInput.itemContent" type="text" placeholder="{{listItem.itemContent}}" ng-required/>
