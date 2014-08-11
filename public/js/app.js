@@ -4,11 +4,9 @@
 
 //LIST CONTROLLER=========================================
   app.controller('ListController', function($scope, listService){
-    $scope.formInput = {
-      itemContent: ""
-    };
 
-    $scope.formEditInput = {
+    //$SCOPE VARIABLES
+    $scope.formInput = {
       itemContent: ""
     };
 
@@ -18,6 +16,7 @@
 
     //PUBLIC METHODS
     $scope.addListItem = function(){
+      console.log($scope.formInput.itemContent);
       listService.addListItem($scope.formInput.itemContent)
         .then(
           loadRemoteData,
@@ -33,16 +32,18 @@
         .then(loadRemoteData);
     };
 
-    $scope.beginEdit = function(id){
-      $('.testing')[id].contentEditable = "true";
+    $scope.beginEdit = function(index){
+      $('.list-item-class')[index].contentEditable = "true";
+      $('.list-item-class')[index].focus();
     };
 
-    //editListItem is currently not being called therefore an edit won't persist
-    $scope.editListItem = function(listItem){
-      console.log(listItem);
-      listService.editListItem(listItem, $scope.formEditInput.itemContent)
-        .then(loadRemoteData);
-        $scope.formEditInput.itemContent = "";
+    $scope.submitEdit = function(keyEvent, index, listItem) {
+      if (keyEvent.which === 13) {
+        $('.list-item-class')[index].contentEditable = "false";
+        $('.list-item-class')[index].blur();
+        listService.editListItem(listItem, $('.list-item-class')[index].innerHTML)
+          .then(loadRemoteData);
+      }
     };
 
     //PRIORITIZING LISTITEMS
@@ -170,6 +171,14 @@
 
     }
   );
+
+$('.list-item-class').keypress(function(e) {
+  console.log("eyyyooo");
+  if (e.keyCode == 13){
+    e.preventDefault();
+    alert("we be balllinnnnn");
+  }
+});
 
 
 })();
