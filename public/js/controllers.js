@@ -1,5 +1,5 @@
 //LIST CONTROLLER=========================================
-var agenderControllers = angular.controller('agenderServices', []);
+var agenderControllers = angular.module('agenderControllers', ['agenderServices']);
 
 agenderControllers.controller('listController', function($scope, listService){
 
