@@ -39,8 +39,10 @@ agenderControllers.controller('listController', function($scope, listService){
     if (keyEvent.which === 13) {
       $('.list-item-class')[index].contentEditable = "false";
       $('.list-item-class')[index].blur();
-      listService.editListItem(listItem, $('.list-item-class')[index].innerHTML)
+
+      listService.editListItem(listItem, $('.list-item-class')[index].innerHTML.replace(/&nbsp;/g, ''))
         .then(loadRemoteData);
+        console.log($('.list-item-class')[index].id);
     }
   };
 

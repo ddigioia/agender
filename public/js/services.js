@@ -42,8 +42,6 @@ agenderServices.factory('listService', function($http, $q){
 
   //Edits the listitem
   function editListItem(listItem, newContent) {
-    console.log(listItem);
-    console.log(newContent);
     var request = $http({
       method: "put",
       url: "/api/update_document",
