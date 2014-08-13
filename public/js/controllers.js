@@ -1,5 +1,6 @@
-//LIST CONTROLLER=========================================
 var agenderControllers = angular.module('agenderControllers', ['agenderServices']);
+
+//LIST CONTROLLER=========================================
 
 agenderControllers.controller('listController', function($scope, listService){
 
@@ -77,4 +78,14 @@ agenderControllers.controller('listController', function($scope, listService){
         }
       );
   }
+});
+
+//USER CONTROLLER=========================================
+
+agenderControllers.controller('userController', function($scope, listService){
+
+  $scope.userSignedIn = function(){
+    return false;
+  };
+
 });

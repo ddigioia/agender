@@ -7,6 +7,15 @@
   display: none !important;
 }
 
+.ng-scope {
+
+}
+
+body {
+  width: 100%;
+  height: 800px;
+}
+
 .list-container {
   margin-top: 100px;
 }
@@ -41,4 +50,12 @@ span.glyphicon-arrow-up, .glyphicon-arrow-down {
 
 .black {
   color: black;
+}
+
+.colorgraph {
+  height: 3px;
+  border-top: 0;
+  background: black;
+  border-radius: 5px;
+
 }

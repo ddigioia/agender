@@ -30,9 +30,8 @@ end
 
   # FRONT END
   get '/' do
-    redirect to "index.html"
+    redirect "/index.html"
   end
-
 
 #HELPER METHODS
 
@@ -98,7 +97,7 @@ end
 
 def generate_rand_id
   id = SecureRandom.urlsafe_base64(23)
-  list_ids = LISTS.find().to_a.map {|l| l["_id"]}
-  (list_ids.include? id) ? generate_rand_id : id
+  # list_ids = LISTS.find().to_a.map {|l| l["_id"]}
+  # (list_ids.include? id) ? generate_rand_id : id
 end
 

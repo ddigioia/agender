@@ -7,6 +7,9 @@
 
 </head>
 <body>
+  <span ng-controller="userController" >
+    <div ng-if="userSignedIn()" ng-include="'partials/sign-in.html'"></div>
+  </span>
   <div class="col-sm-6 col-sm-offset-3 list-container" ng-controller="listController as list">
     <form class="listItem-form" ng-submit="addListItem()">
       <input ng-model="formInput.itemContent" type="text" class="form-control" placeholder="Eat a bunch of cheese" />
@@ -16,9 +19,6 @@
       <span ng-cloak class="ng-cloak">
         <h3 contenteditable="false" class="list-item-class" ng-keypress="submitEdit($event, $index, listItem)" id='listItem-{{$index}}'>{{listItem.itemContent}}</h3>
       </span>
-<!--       <form ng-show="editing" ng-submit="editListItem(listItem); editing = false">
-        <input ng-model="formEditInput.itemContent" type="text" placeholder="{{listItem.itemContent}}" ng-required/>
-      </form>   -->
         <span class="button-container">
           <!--Buttons to prioritize list items-->
           <span ng-show="!$first" ng-click="moveUp($index)" class="glyphicon glyphicon-arrow-up"></span>
